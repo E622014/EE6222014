@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>INR Currency Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #f4f4f4;
+    }
+    .converter {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, select, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="converter">
+    <h2>Currency Converter (INR to USD/EUR/GBP)</h2>
+    
+    <input type="number" id="inrAmount" placeholder="Enter amount in INR">
+    
+    <select id="currency">
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+    </select>
+    
+    <br>
+    
+    <button onclick="convertCurrency()">Convert</button>
+    
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function convertCurrency() {
+      const amountInINR = parseFloat(document.getElementById("inrAmount").value);
+      const currency = document.getElementById("currency").value;
+      const exchangeRates = {
+        USD: 83,
+        EUR: 89,
+        GBP: 104
+      };
+      const symbols = {
+        USD: "$",
+        EUR: "€",
+        GBP: "£"
+      };
+
+      if (isNaN(amountInINR) || amountInINR <= 0) {
+        document.getElementById("result").innerText = "Please enter a valid amount.";
+        return;
+      }
+
+      const converted = (amountInINR / exchangeRates[currency]).toFixed(2);
+      document.getElementById("result").innerText = `Converted Amount: ${symbols[currency]}${converted}`;
+    }
+  </script>
+
+</body>
+</html>
